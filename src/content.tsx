@@ -2,6 +2,7 @@ import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig, PlasmoGetInlineAnchorList } from "plasmo"
 
 import DownloadVoiceButton from "~components/downloadVoiceButton"
+import {Button, NextUIProvider} from "@nextui-org/react";
 
 export const config: PlasmoCSConfig = {
   matches: ["https://chatgpt.com/*"]
@@ -18,7 +19,9 @@ export const getStyle = () => {
 
 const PlasmoOverlay = () => {
   return (
-    <DownloadVoiceButton messageId={'a677a827-e882-48c5-8ec2-9259f7e343b6'}/>
+    <NextUIProvider>
+      <DownloadVoiceButton />
+    </NextUIProvider>
   )
 }
 
