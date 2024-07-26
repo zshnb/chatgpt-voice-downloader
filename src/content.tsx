@@ -8,7 +8,7 @@ export const config: PlasmoCSConfig = {
 }
 
 export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () =>
-  document.querySelectorAll(".group\\/conversation-turn div[data-message-author-role=\"assistant\"]")
+  document.querySelectorAll(".group\\/conversation-turn div :has(div[data-message-author-role=\"assistant\"]) + div > div > div")
 
 export const getStyle = () => {
   const style = document.createElement("style")
