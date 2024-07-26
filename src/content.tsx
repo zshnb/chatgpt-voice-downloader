@@ -1,7 +1,6 @@
 import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig, PlasmoGetInlineAnchorList } from "plasmo"
 
-import { CountButton } from "~features/count-button"
 import DownloadVoiceButton from "~components/downloadVoiceButton"
 
 export const config: PlasmoCSConfig = {

@@ -14,7 +14,7 @@ chrome.webRequest.onCompleted.addListener((details) => {
   }
 
   function getConversationId() {
-    const pattern = /(?<=conversation\/).{6,}/
+    const pattern = /(?<=conversation\/).{36}/
     const matchResult = pattern.exec(url)
     if (matchResult) {
       return matchResult[0]
@@ -23,5 +23,3 @@ chrome.webRequest.onCompleted.addListener((details) => {
     }
   }
 }, {urls: ['https://chatgpt.com/backend-api/conversation/*']})
-
-chrome.runtime.onMessage

@@ -1,38 +1,23 @@
-import { useEffect, useState } from "react"
+import {sendToBackground} from "@plasmohq/messaging";
+import type {MouseEvent} from "react";
 
 export type DownloadVoiceButtonProps = {
   messageId: string
 }
 const DownloadVoiceButton = ({messageId}: DownloadVoiceButtonProps) => {
-  const [jwt, setJwt] = useState('')
-  const [conversationId, setConversationId] = useState('')
-  useEffect(() => {
-    chrome.storage.local.get(['jwt', 'conversationId']).then(result => {
-      console.log(result)
-      setJwt(result.jwt)
-      setConversationId(result.conversationId)
+  async function handleDownload(event: MouseEvent<HTMLButtonElement>) {
+    // @ts-ignore
+    const groupDom = event.target.offsetParent.parentElement.offsetParent
+    const messageDom = groupDom.querySelector('div[data-message-id]')
+    console.log(messageDom)
+    const messageId = messageDom.getAttribute('data-message-id')
+    await sendToBackground({
+      name: 'download',
+      body: {
+        messageId
+      },
+      extensionId: 'olcjfanhelecheolfimeglloebiknnjb'
     })
-  }, [])
-
-
-  async function handleDownload() {
-    const response = await fetch(`https://chatgpt.com/backend-api/synthesize?message_id=${messageId}&conversation_id=${conversationId}&voice=cove&format=aac`, {
-      method: 'GET',
-      headers: {
-        Authorization: jwt,
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
-      }
-    })
-    if (!response.ok) {
-      console.log('download voice error')
-    }
-
-    const blob = await response.blob()
-    const url = URL.createObjectURL(blob);
-    await chrome.downloads.download({
-      url: url,
-      filename: 'message.aac'
-    });
   }
 
   return (
