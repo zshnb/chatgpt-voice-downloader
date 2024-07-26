@@ -1,11 +1,15 @@
 import cssText from "data-text:~style.css"
-import type { PlasmoCSConfig } from "plasmo"
+import type { PlasmoCSConfig, PlasmoGetInlineAnchorList } from "plasmo"
 
 import { CountButton } from "~features/count-button"
+import DownloadVoiceButton from "~components/downloadVoiceButton"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://www.plasmo.com/*"]
+  matches: ["https://chatgpt.com/*"]
 }
+
+export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () =>
+  document.querySelectorAll(".group\\/conversation-turn div[data-message-author-role=\"assistant\"]")
 
 export const getStyle = () => {
   const style = document.createElement("style")
@@ -15,9 +19,7 @@ export const getStyle = () => {
 
 const PlasmoOverlay = () => {
   return (
-    <div className="plasmo-z-50 plasmo-flex plasmo-fixed plasmo-top-32 plasmo-right-8">
-      <CountButton />
-    </div>
+    <DownloadVoiceButton messageId={'a677a827-e882-48c5-8ec2-9259f7e343b6'}/>
   )
 }
 
