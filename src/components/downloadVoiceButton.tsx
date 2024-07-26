@@ -1,10 +1,11 @@
 import {sendToBackground} from "@plasmohq/messaging";
 import type {MouseEvent} from "react";
+import {Button, CircularProgress} from "@nextui-org/react";
 
 export type DownloadVoiceButtonProps = {
   messageId: string
 }
-const DownloadVoiceButton = ({messageId}: DownloadVoiceButtonProps) => {
+const DownloadVoiceButton = () => {
   async function handleDownload(event: MouseEvent<HTMLButtonElement>) {
     // @ts-ignore
     const groupDom = event.target.offsetParent.parentElement.offsetParent
@@ -21,7 +22,9 @@ const DownloadVoiceButton = ({messageId}: DownloadVoiceButtonProps) => {
   }
 
   return (
-    <button className={'plasmo-p-2 plasmo-rounded'} onClick={handleDownload}>下载</button>
+    <Button color="danger" isLoading>
+      124
+    </Button>
   )
 }
 
