@@ -13,7 +13,7 @@ const DownloadVoiceButton = () => {
         // @ts-ignore
         return event.target.parentElement.offsetParent.parentElement.offsetParent
         // @ts-ignore
-      } else if (event.target.nodeName === 'line') {
+      } else if (event.target.nodeName === 'line' || event.target.nodeName === 'path' || event.target.nodeName === 'polyline') {
         // @ts-ignore
         return event.target.parentElement.parentElement.offsetParent.parentElement.offsetParent
       } else {
