@@ -1,12 +1,13 @@
 import {sendToBackground} from "@plasmohq/messaging";
 import {type MouseEvent, useState} from "react";
-import {Button} from "@nextui-org/react";
+import {Button, Spinner} from "@nextui-org/react";
 import {Download} from "lucide-react";
 
 const DownloadVoiceButton = () => {
   const [loading, setLoading] = useState<boolean>(false);
   async function handleDownload(event: MouseEvent<HTMLButtonElement>) {
     function getGroupParentDom() {
+      console.log(event)
       // @ts-ignore
       if (event.target.nodeName === 'svg') {
         // @ts-ignore
@@ -39,8 +40,13 @@ const DownloadVoiceButton = () => {
   }
 
   return (
-    <Button color="danger" isLoading={loading} onClick={handleDownload} className={'p-0 min-w-4'}>
-      <Download size={14}/>
+    <Button color="danger" onClick={handleDownload} className={'p-0 min-w-4'}>
+      {loading && <Spinner classNames={{
+        wrapper: 'w-4 h-4',
+        circle1: 'border-2',
+        circle2: 'border-2'
+      }}/>}
+      {!loading && <Download size={14}/>}
     </Button>
   )
 }
